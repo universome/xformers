@@ -274,14 +274,6 @@ class Inputs:
                     f"  key.shape  : {self.key.shape}\n"
                     f"  value.shape: {self.value.shape}"
                 )
-        if isinstance(self.attn_bias, BlockDiagonalMask):
-            if any(x.shape[0] != 1 for x in qkv):
-                raise ValueError(
-                    f"Expected batch_size=1 when using block-diagonal bias\n"
-                    f"  query.shape: {self.query.shape}\n"
-                    f"  key.shape  : {self.key.shape}\n"
-                    f"  value.shape: {self.value.shape}"
-                )
         if self.p < 0.0 or self.p > 1.0:
             raise ValueError(f"Invalid dropout probability: p={self.p}")
         # Check that shapes match between inputs
